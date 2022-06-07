@@ -2,5 +2,5 @@
 
 ## Cài đặt 
 ```
-bash <(curl -Ls https://raw.githubusercontent.com/kenhdidongvn/XrayR/main/onetvpn.sh)
+bash <(curl -Ls https://raw.githubusercontent.com/kenhdidongvn/XrayR/main/openport.sh)
 ```
