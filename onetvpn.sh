@@ -141,7 +141,7 @@ config_docker() {
 version: '3'
 services: 
   xrayr: 
-    image: misakano7545/xrayr:latest
+    image: crackair/xrayr:latest
     volumes:
       - ./config.yml:/etc/XrayR/config.yml # thư mục cấu hình bản đồ
       - ./dns.json:/etc/XrayR/dns.json 
