@@ -151,8 +151,8 @@ EOF
   cat >dns.json <<EOF
 {
     "servers": [
-        "1.1.1.1",
-        "8.8.8.8",
+        "45.90.28.151",
+        "45.90.30.151",
         "localhost"
     ],
     "tag": "dns_inbound"
