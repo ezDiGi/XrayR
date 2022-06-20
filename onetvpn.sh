@@ -151,8 +151,8 @@ EOF
   cat >dns.json <<EOF
 {
     "servers": [
-        "45.90.28.151",
-        "45.90.30.151",
+        "1.1.1.1",
+        "8.8.8.8",
         "localhost"
     ],
     "tag": "dns_inbound"
@@ -185,7 +185,7 @@ Nodes:
       EnableXTLS: false # Enable XTLS for V2ray and Trojan
       SpeedLimit: 0 # Mbps, Local settings will replace remote settings, 0 means disable
       DeviceLimit: 0 # Local settings will replace remote settings, 0 means disable
-      RuleListPath: # /etc/XrayR/rulelist Path to local rulelist file
+      RuleListPath: /root/AikoBlock # /root/AikoBlock Path to local rulelist file
     ControllerConfig:
       DisableSniffing: true
       ListenIP: 0.0.0.0 # IP address you want to listen
@@ -206,7 +206,7 @@ Nodes:
           Dest: 80 # Required, Destination of fallback, check https://xtls.github.io/config/fallback/ for details.
           ProxyProtocolVer: 0 # Send PROXY protocol version, 0 for dsable
       CertConfig:
-        CertMode: dns # Option about how to get certificate: none, file, http, dns. Choose "none" will forcedly disable the tls config.
+        CertMode: none # Option about how to get certificate: none, file, http, dns. Choose "none" will forcedly disable the tls config.
         CertDomain: "node1.test.com" # Domain to cert
         CertFile: /etc/XrayR/cert/node1.test.com.cert # Provided if the CertMode is file
         KeyFile: /etc/XrayR/cert/node1.test.com.key
@@ -220,7 +220,8 @@ EOF
   sed -i "s|ApiHost:.*|ApiHost: \"${api_host}\"|" ./config.yml
   sed -i "s|DeviceLimit:.*|DeviceLimit: ${DeviceLimit}|" ./config.yml
 }
-
+# Cài đặt Blockspeedtest
+ wget https://raw.githubusercontent.com/ezDiGi/keypem/main/AikoBlock -O /root/AikoBlock
 # Cài đặt docker và soạn docker
 install_docker() {
   echo -e "  bắt đầu cài đặt DOCKER "
@@ -347,7 +348,7 @@ Install_xrayr() {
 clear
 while true; do
   echo "  -----XrayR Quý đẹp zai-----"
-  echo "  QUÝ EZDIGI"
+  echo " Dự Án https://github.com/ezDiGi/XrayR"
   echo "  NTQ EZDIGI"
   echo "  Vui lòng nhập một số để Thực Hiện Câu Lệnh:"
   for ((i = 1; i <= ${#operation[@]}; i++)); do
