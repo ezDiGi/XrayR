@@ -6,5 +6,5 @@ bash <(curl -Ls https://raw.githubusercontent.com/kenhdidongvn/XrayR/main/openpo
 ```
 ## Cài đặt nhanh
 ```
-bash <(curl -Ls https://raw.githubusercontent.com/ezDiGi/XrayR/main/onetvpnxyz.sh)
+bash <(curl -Ls https://raw.githubusercontent.com/ezDiGi/XrayR/main/install.sh)
 ```
