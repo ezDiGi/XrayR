@@ -239,6 +239,7 @@ chmod +x /usr/local/bin/docker-compose
   echo
   echo -e "Đã Hoàn Tất Cài Đặt ！"
   echo -e "0 0 */3 * *  cd /root/${cur_dir} && /usr/local/bin/docker-compose pull && /usr/local/bin/docker-compose up -d" >>/etc/crontab
+  echo -e "Cài đặt cập nhật thời gian kết thúc đã hoàn tất! hệ thống sẽ update sau [${green}24H${plain}] Từ lúc bạn cài đặt"
  
 }
 
@@ -347,7 +348,7 @@ Install_xrayr() {
 # Initialization step
 clear
 while true; do
-  echo "-----Bản Quyền Thuộc Về ADMIN SPEED4G.XYZ-----"
+  echo "-----Bản Quyền Thuộc Về ADMIN EZDIGI.VN-----"
   echo "Vui Lòng Nhập Một Số Để Thực Hiện Câu Lệnh:"
   for ((i = 1; i <= ${#operation[@]}; i++)); do
     hint="${operation[$i - 1]}"
