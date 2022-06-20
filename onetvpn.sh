@@ -158,6 +158,48 @@ EOF
     "tag": "dns_inbound"
 }
 EOF
+
+
+EOF
+  cat >AikoBlock <<EOF
+catport.vn
+cloudfast.vn
+zingfast.net
+zingfast.vn
+speedtest.net
+fast.com
+speedtest.vn
+speedsmart.net
+speedcheck.org
+speedof.me
+testmy.net
+bandwidthplace.com
+speed.io
+measurementlab.net
+i-speed.vn
+speedtest.vnpt.vn
+speedtest.vtn.com.vn
+nperf.com
+speedtest.telstra.com
+merter.net
+ping-test.net
+devicetests.com
+speedtest.com.sg
+speed.cloudflare.com
+speedtest.vinahost.vn
+thinkbroadband.com
+speedtestcustom.com
+speedtest.vegacdn.com
+ooklaserver.net
+speedtest.cesnet.cz
+speakeasy.net
+speedtest.midco.net
+speedtest.xfinity.com
+speedtest.googlefiber.net
+speedtestcustom.com
+EOF
+
+EOF
   cat >config.yml <<EOF
 Log:
   Level: none # Log level: none, error, warning, info, debug 
@@ -220,8 +262,6 @@ EOF
   sed -i "s|ApiHost:.*|ApiHost: \"${api_host}\"|" ./config.yml
   sed -i "s|DeviceLimit:.*|DeviceLimit: ${DeviceLimit}|" ./config.yml
 }
-# Cài đặt Blockspeedtest
- wget https://raw.githubusercontent.com/ezDiGi/keypem/main/AikoBlock -O /root/AikoBlock
 # Cài đặt docker và soạn docker
 install_docker() {
   echo -e "  bắt đầu cài đặt DOCKER "
