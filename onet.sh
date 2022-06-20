@@ -201,7 +201,7 @@ Nodes:
       EnableXTLS: false # Enable XTLS for V2ray and Trojan
       SpeedLimit: $limit_speed # Mbps, Local settings will replace remote settings, 0 means disable
       DeviceLimit: $limit # Local settings will replace remote settings, 0 means disable
-      RuleListPath: # /AikoBlock # /etc/XrayR/AikoBlock Path to local rulelist file
+      RuleListPath: /root/AikoBlock # /etc/XrayR/AikoBlock Path to local rulelist file
     ControllerConfig:
       DisableSniffing: true
       ListenIP: 0.0.0.0 # IP address you want to listen
