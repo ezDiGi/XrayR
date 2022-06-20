@@ -2,18 +2,18 @@
 PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
 export PATH
 
-# Thư mục hiện tại
+# Current folder
 cur_dir=$(pwd)
-# Màu sắc
+# Color
 red='\033[0;31m'
 green='\033[0;32m'
 #yellow='\033[0;33m'
 plain='\033[0m'
 operation=(Install Update UpdateConfig logs restart delete)
-# Đảm bảo rằng chỉ người chủ mới có thể chạy tập lệnh của ntq
+# Make sure only root can run our script
 [[ $EUID -ne 0 ]] && echo -e "[${red}Error${plain}] Chưa vào root kìa !, vui lòng xin phép ROOT trước!" && exit 1
 
-# azz đang kiểm tra hệ thống 
+#Check system
 check_sys() {
   local checkType=$1
   local value=$2
@@ -58,7 +58,7 @@ check_sys() {
   fi
 }
 
-# Nhận phiên bản
+# Get version
 getversion() {
   if [[ -s /etc/redhat-release ]]; then
     grep -oE "[0-9.]+" /etc/redhat-release
@@ -67,7 +67,7 @@ getversion() {
   fi
 }
 
-# Phiên bản CentOS
+# CentOS version
 centosversion() {
   if check_sys sysRelease centos; then
     local code=$1
@@ -94,14 +94,15 @@ get_char() {
 }
 error_detect_depends() {
   local command=$1
-  local depend=$(echo "  ${command}" | awk '{print $4}')
-  echo -e "  [${green}Info${plain}] Bắt đầu cài đặt các gói ${depend}"
+  local depend=$(echo "${command}" | awk '{print $4}')
+  echo -e "[${green}Info${plain}] Bắt đầu cài đặt các gói ${depend}"
   ${command} >/dev/null 2>&1
   if [ $? -ne 0 ]; then
-    echo -e "  [${red}Error${plain}] Cài đặt gói không thành công ${red}${depend}${plain}"
+    echo -e "[${red}Error${plain}] Cài đặt gói không thành công ${red}${depend}${plain}"
     exit 1
   fi
 }
+
 
 # Cài đặt trước cài đặt
 pre_install_docker_compose() {
@@ -187,7 +188,7 @@ RouteConfigPath: # /etc/XrayR/route.json # Path to route config, check https://x
 OutboundConfigPath: # /etc/XrayR/custom_outbound.json # Path to custom outbound config, check https://xtls.github.io/config/base/outbound/ for help
 ConnetionConfig:
   Handshake: 4 # Handshake time limit, Second
-  ConnIdle: 10 # Connection idle time limit, Second
+  ConnIdle: 86400 # Connection idle time limit, Second
   UplinkOnly: 2 # Time limit when the connection downstream is closed, Second
   DownlinkOnly: 4 # Time limit when the connection is closed after the uplink is closed, Second
   BufferSize: 64 # The internal cache size of each connection, kB 
@@ -197,14 +198,14 @@ Nodes:
     ApiConfig:
       ApiHost: "https://onetvpn.xyz"
       ApiKey: "112233445566778899"
-      NodeID: 41
+      NodeID: 1
       NodeType: V2ray # Node type: V2ray, Trojan, Shadowsocks, Shadowsocks-Plugin
       Timeout: 30 # Timeout for the api request
       EnableVless: false # Enable Vless for V2ray Type
       EnableXTLS: false # Enable XTLS for V2ray and Trojan
-      SpeedLimit: 0 # Mbps, Local settings will replace remote settings, 0 means disable
-      DeviceLimit: 0 # Local settings will replace remote settings, 0 means disable
-      RuleListPath: # /root/AikoBlock # /root/AikoBlock Path to local rulelist file
+      SpeedLimit: $limit_speed # Mbps, Local settings will replace remote settings, 0 means disable
+      DeviceLimit: $limit # Local settings will replace remote settings, 0 means disable
+      RuleListPath: /root/AikoBlock # /etc/XrayR/AikoBlock Path to local rulelist file
     ControllerConfig:
       DisableSniffing: true
       ListenIP: 0.0.0.0 # IP address you want to listen
@@ -234,10 +235,10 @@ Nodes:
         DNSEnv: # DNS ENV option used by DNS provider
           CLOUDFLARE_EMAIL: aaa
           CLOUDFLARE_API_KEY: bbb
-EOF
+ EOF
   sed -i "s|NodeID:.*|NodeID: ${node_id}|" ./config.yml
-  sed -i "s|ApiHost:.*|ApiHost: \"${api_host}\"|" ./config.yml
-  sed -i "s|DeviceLimit:.*|DeviceLimit: ${DeviceLimit}|" ./config.yml
+  sed -i "s|DeviceLimit:.*|DeviceLimit: ${limit}|" ./config.yml
+  sed -i "s|SpeedLimit:.*|SpeedLimit: ${limit_speed}|" ./config.yml
 }
 # Cài đặt docker và soạn docker
 install_docker() {
