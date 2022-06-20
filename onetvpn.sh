@@ -110,7 +110,6 @@ pre_install_docker_compose() {
   if [ "$api_host" == "1" ]; then
     api_host="https://onetvpn.xyz"
   fi
-
   echo "--------------------------------"
   echo "  Bạn đã chọn ${api_host}"
   echo "--------------------------------"
@@ -159,6 +158,24 @@ EOF
 }
 EOF
 
+
+EOF
+  cat >AikoBlock <<EOF
+speedtest.net
+fast.com
+speedtest.vn
+speedsmart.net
+speedcheck.org
+speedof.me
+testmy.net
+bandwidthplace.com
+speed.io
+measurementlab.net
+i-speed.vn
+speedtest.vnpt.vn
+speedtest.vtn.com.vn
+EOF
+
 EOF
   cat >config.yml <<EOF
 Log:
@@ -187,7 +204,7 @@ Nodes:
       EnableXTLS: false # Enable XTLS for V2ray and Trojan
       SpeedLimit: 0 # Mbps, Local settings will replace remote settings, 0 means disable
       DeviceLimit: 0 # Local settings will replace remote settings, 0 means disable
-      RuleListPath: /root/AikoBlock # /root/AikoBlock Path to local rulelist file
+      RuleListPath: # /root/AikoBlock # /root/AikoBlock Path to local rulelist file
     ControllerConfig:
       DisableSniffing: true
       ListenIP: 0.0.0.0 # IP address you want to listen
